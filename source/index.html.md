@@ -284,7 +284,8 @@ component | true | Urbancode component id
 		"active": "true",
 		"user": "Application Innovation Admin (aiadmin)",
 		"deleted": "false",
-		"enforceCompleteSnapshots": "false"]
+		"enforceCompleteSnapshots": "false"
+		}]
 	}
 ]
 ```
@@ -379,7 +380,7 @@ componentId | true | Urbancode component id
 		"versionId": "cf8c5f69-9dae-464d-a926-09fd17901a8a",
 		"environment": "DEVELOPMENT",
 		"applicationProcessId": "4722e777-7756-4113-b7d4-6401180169e6"
-	},{
+	}
 ]
 ```
 
