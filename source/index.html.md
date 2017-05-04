@@ -5,6 +5,466 @@ title: Boomerang Platform API Reference
 # Introduction
 
 Welcome to the Boomerang Platform REST API! We have a list of endpoints and parameters, along with a sample json response in the dark area to the right.
+-------------
+# CI
+
+Here we have endpoints for Boomerang CI.
+
+### HTTP Request
+
+`GET /ci/auth`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+code | true | Code obtained from Github Enterprise to authorize
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"access_token": "e72e16c7e42f292c6912e7710c838347ae178b4a",
+		"scope": "user%2Cgist",
+		"token_type": "bearer"
+	}
+]
+```
+This endpoint calls Github Enterprise which returns an authorization token to the BoomerangCi app.
+
+### HTTP Request
+
+`GET /ci/repo`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+token | true | Github auth token
+owner | false | Name of owning github organization. If not specified, defaults to "".
+repo | true | Name of Github repository.
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"repoFullName": "GBS-AIC-MobileScale/mff_adapter_test",
+		"buildNumber": "27",
+		"componentStartDate": "2017-04-26 19:56:47.0",
+		"componentDuration": "111",
+		"componentStatus": "SUCCEEDED",
+		"admin": true,
+		"componentId": "bf8ee96e-e7da-4f8f-9254-692a7d54804c",
+		"componentProcessType": "BUILD",
+		"mode": "mff.adapter"
+	}
+]
+```
+
+This endpoint get associated information for a specific repository.
+
+### HTTP Request
+
+`GET /ci/repos`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+token | true | Github auth token
+page | false | Page number of repositories returned (sets of 15). If not specified, defaults to 1.
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"repoFullName": "GBS-AIC-MobileScale/WatsonTelephoneGame",
+		"buildNumber": "50",
+		"componentStartDate": "2017-04-21 21:11:13.0",
+		"componentDuration": "111",
+		"componentStatus": "SUCCEEDED",
+		"admin": true,
+		"componentId": "86113ad5-92dc-4cd8-88ca-aedd1ab71d0a",
+		"componentProcessType": "BUILD",
+		"mode": "iOS"
+	}, {
+		"repoFullName": "GBS-AIC-MobileScale/unitedairlines-onboardfoodsales",
+		"buildNumber": "35",
+		"componentStartDate": "2017-05-04 12:32:19.0",
+		"componentDuration": "107",
+		"componentStatus": "SUCCEEDED",
+		"admin": true,
+		"componentId": "11aaa303-623b-4635-8a68-a194a04c91ff",
+		"componentProcessType": "BUILD",
+		"mode": "iOS"
+	},
+	.....
+]
+```
+
+This endpoint get associated information for all repository a Github auth token has access.
+
+### HTTP Request
+
+`GET /ci/webhook/find`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+token | true | Github auth token
+owner | false | Name of owning github organization. If not specified, defaults to "".
+repo | true | Name of Github repository.
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"id": 1,
+		"url": "https://api.github.com/repos/octocat/Hello-World/hooks/1",
+		"test_url": "https://api.github.com/repos/octocat/Hello-World/hooks/1/test",
+		"ping_url": "https://api.github.com/repos/octocat/Hello-World/hooks/1/pings",
+		"name": "web",
+		"events": [
+		"push",
+		"pull_request"
+		],
+		"active": true,
+		"config": {
+		"url": "http://example.com/webhook",
+		"content_type": "json"
+		},
+		"updated_at": "2011-09-06T20:39:23Z",
+		"created_at": "2011-09-06T17:26:27Z"
+	}
+]
+```
+
+This endpoint returns information about a webhook that matches https://services.boomerangplatform.net/webhook/payload.
+
+### HTTP Request
+
+`GET /ci/webhook/create`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+token | true | Github auth token
+owner | false | Name of owning github organization. If not specified, defaults to "".
+repo | true | Name of Github repository.
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"id": 1,
+		"url": "https://api.github.com/repos/octocat/Hello-World/hooks/1",
+		"test_url": "https://api.github.com/repos/octocat/Hello-World/hooks/1/test",
+		"ping_url": "https://api.github.com/repos/octocat/Hello-World/hooks/1/pings",
+		"name": "web",
+		"events": [
+		"push",
+		"pull_request"
+		],
+		"active": true,
+		"config": {
+		"url": "http://example.com/webhook",
+		"content_type": "json"
+		},
+		"updated_at": "2011-09-06T20:39:23Z",
+		"created_at": "2011-09-06T17:26:27Z"
+	}
+]
+```
+
+This endpoint returns a list of app components for a given UrbanCode application
+
+### HTTP Request
+
+`GET /ci/component/activities/latest`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+componentId | true | Urbancode Component id of the component to find activity
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"name": "Mobile@Scale - IBM - WatsonTelephoneGame",
+		"version": "release-38",
+		"startDate": "2017-03-29 18:10:22.0",
+		"duration": "130",
+		"status": "SUCCEEDED",
+		"versionId": "cf8c5f69-9dae-464d-a926-09fd17901a8a",
+		"count": "",
+		"coverage": "",
+		"environment": "DEVELOPMENT",
+		"applicationProcessId": "d1bf09cf-3662-4142-9d33-a2e9a0b5c96c",
+		"processType": "BUILD",
+		"gitCommitId": "329372687fe5954c0cb6fda95ae81058cb2b9173",
+		"gitCommitMessage": "Updated+to+reflect+latest+Boomerang+property+reqs",
+		"gitAuthorName": "TYSON W. LAWRIE"
+	}
+]
+```
+
+This endpoint returns the latest activity for the given component.
+
+### HTTP Request
+
+`GET /ci/component/activities`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+componentId | true | Urbancode Component id of the component to find activity
+activityType | false | Type of activity to retrieve (all,build,test,deploy). If not specified, defaults to "".
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"name": "Mobile@Scale - IBM - WatsonTelephoneGame",
+		"version": "release-38",
+		"startDate": "2017-04-03 20:01:12.0",
+		"duration": "121",
+		"status": "SUCCEEDED",
+		"versionId": "cf8c5f69-9dae-464d-a926-09fd17901a8a",
+		"count": "",
+		"coverage": "",
+		"environment": "DEVELOPMENT",
+		"applicationProcessId": "bb61214a-c308-42fc-b80e-4e1c679cab72",
+		"processType": "BUILD",
+		"gitCommitId": "329372687fe5954c0cb6fda95ae81058cb2b9173",
+		"gitCommitMessage": "Updated+to+reflect+latest+Boomerang+property+reqs",
+		"gitAuthorName": "TYSON W. LAWRIE"
+		
+	},
+	......
+]
+```
+
+This endpoint returns the all specified activity of a given type (all,build,test,deploy) for the given component.
+
+### HTTP Request
+
+`GET /ci/component/application`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+component | true | Urbancode component id
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"applications": [{
+		"templateId": "9e7be725-6ec6-4f67-b84a-8d85996138a9",
+		"tags": [],
+		"id": "0f048385-5fc8-42d0-bf19-6c9f04f854da",
+		"templateVersion": "-1",
+		"securityResourceId": "b03460c2-873f-451d-8c3a-3555473aeef5",
+		"created": "1488896772201",
+		"description": "",
+		"name": "Mobile@Scale - IBM",
+		"active": "true",
+		"user": "Application Innovation Admin (aiadmin)",
+		"deleted": "false",
+		"enforceCompleteSnapshots": "false"]
+	}
+]
+```
+
+This endpoint gets the application associated with a given component.
+
+### HTTP Request
+
+`GET /ci/application/environment`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+applicationName | true | Urbancode application name
+
+> This endpoint returns JSON structured like this:
+
+```json
+{
+		"noSelfApprovals": "false",
+		"calendarId": "7cec31bc-0b54-4f4c-9edf-d75589a83a90",
+		"securityResourceId": "cc9bb957-109b-435d-ad4d-5ef58e7095c8",
+		"requireApprovals": "false",
+		"cleanupCountToKeep": "0",
+		"deleted": "false",
+		"useSystemDefaultDays": "true",
+		"conditions": [],
+		"id": "7164e419-3369-4d5c-b72a-cfd22f934066",
+		"lockSnapshots": "false",
+		"color": "#00B2EF",
+		"description": "",
+		"name": "DEVELOPMENT",
+		"cleanupDaysToKeep": "0",
+		"active": "true",
+		"historyCleanupDaysToKeep": "365",
+		"enableProcessHistoryCleanup": "false"
+	}
+]
+```
+
+This endpoint gets the latest environment stored in an array of the associated application.
+
+### HTTP Request
+
+`GET /ci/component/deploys/latest`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+componentId | true | Urbancode component id
+
+> This endpoint returns JSON structured like this:
+
+```json
+{
+		"name": "Mobile@Scale - IBM - WatsonTelephoneGame",
+		"version": "release-38",
+		"startDate": "2017-03-28 14:19:53.0",
+		"duration": "38",
+		"status": "SUCCEEDED",
+		"versionId": "cf8c5f69-9dae-464d-a926-09fd17901a8a",
+		"environment": "DEVELOPMENT",
+		"applicationProcessId": "4722e777-7756-4113-b7d4-6401180169e6"
+	}
+]
+```
+
+This endpoint gets the latest deploy for the specified component.
+
+### HTTP Request
+
+`GET /ci/component/deploys`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+componentId | true | Urbancode component id
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"name": "Mobile@Scale - IBM - WatsonTelephoneGame",
+		"version": "release-38",
+		"startDate": "2017-03-28 14:19:53.0",
+		"duration": "38",
+		"status": "SUCCEEDED",
+		"versionId": "cf8c5f69-9dae-464d-a926-09fd17901a8a",
+		"environment": "DEVELOPMENT",
+		"applicationProcessId": "4722e777-7756-4113-b7d4-6401180169e6"
+	},{
+	.....
+]
+```
+
+This endpoint gets all deploy for the specified component.
+
+### HTTP Request
+
+`GET /ci/process/create`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+componentId | true | Urbancode component id
+versionId | true | Urbancode version id of the component
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+		"requestId": "f7e7b00d-8ea6-4a95-ad74-0ff853125232"
+	}
+]
+```
+
+This endpoint runs an application process for the given component id and version id in UrbanCode Deploy.
+
+### HTTP Request
+
+`GET /ci/find/application/name`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+component | true | Urbancode component id
+------------------------
+
+> This endpoint returns JSON structured like this:
+
+```List of Strings
+[
+	"Mobile@Scale - IBM"
+]
+```
+This endpoint gets a list application names for a given component.
+
+### HTTP Request
+
+`GET /ci/find/application/id`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+component | true | Urbancode component id
+------------------------
+
+> This endpoint returns JSON structured like this:
+
+```List of Strings
+[
+	"0f048385-5fc8-42d0-bf19-6c9f04f854da"
+]
+```
+This endpoint gets a list application ids for a given component.
+
+### HTTP Request
+
+`GET /ci/version/artifact/download`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+componentName | true | Urbancode component name
+versionName | true | Urbancode version name
+artifactName | true | Urbancode artifact name (ie. build log)
+------------------------
+
+> This endpoint returns a txt document.
+This endpoint downloads the specified artifact of the given component and version.
 
 # Insights
 
