@@ -12,7 +12,7 @@ Here we have endpoints for Boomerang CI.
 
 ### HTTP Request
 
-`GET /ci/auth`
+`POST /ci/auth`
 
 ### Query Parameters
 
@@ -101,7 +101,6 @@ page | false | Page number of repositories returned (sets of 15). If not specifi
 		"componentProcessType": "BUILD",
 		"mode": "iOS"
 	},
-	.....
 ]
 ```
 
@@ -252,7 +251,6 @@ activityType | false | Type of activity to retrieve (all,build,test,deploy). If 
 		"gitAuthorName": "TYSON W. LAWRIE"
 		
 	},
-	......
 ]
 ```
 
@@ -381,7 +379,6 @@ componentId | true | Urbancode component id
 		"environment": "DEVELOPMENT",
 		"applicationProcessId": "4722e777-7756-4113-b7d4-6401180169e6"
 	},{
-	.....
 ]
 ```
 
@@ -389,7 +386,7 @@ This endpoint gets all deploy for the specified component.
 
 ### HTTP Request
 
-`GET /ci/process/create`
+`PUT /ci/process/create`
 
 ### Query Parameters
 
@@ -465,6 +462,180 @@ artifactName | true | Urbancode artifact name (ie. build log)
 
 > This endpoint returns a txt document.
 This endpoint downloads the specified artifact of the given component and version.
+
+# Webhook
+
+Here we have one endpoint for Boomerang Webhook.
+
+### HTTP Request
+
+`POST /webhook/payload`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+payload | true | Payload delivery from Github triggered from a push to a repository
+
+> This endpoint returns JSON structured like this:
+
+```json
+[
+	{
+	  "ref": "refs/tags/1.0.22",
+	  "before": "0000000000000000000000000000000000000000",
+	  "after": "8004635f32566318863025437c215afd86ddce08",
+	  "created": true,
+	  "deleted": false,
+	  "forced": true,
+	  "base_ref": null,
+	  "compare": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/compare/1.0.22",
+	  "commits": [
+
+	  ],
+	  "head_commit": {
+	    "id": "b323b6e85e9b9afc8140d5cab35076269fda0ee5",
+	    "tree_id": "f38b1b3d04864852dde9103d3736b484e5befee7",
+	    "distinct": true,
+	    "message": "get adapter from 1.0.22",
+	    "timestamp": "2017-03-29T21:36:32+05:30",
+	    "url": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-			onboardfoodsales/commit/b323b6e85e9b9afc8140d5cab35076269fda0ee5",
+	    "author": {
+	      "name": "Rajesh Iyer",
+	      "email": "rajeshiy@in.ibm.com",
+	      "username": "rajeshiy"
+	    },
+	    "committer": {
+	      "name": "Rajesh Iyer",
+	      "email": "rajeshiy@in.ibm.com",
+	      "username": "rajeshiy"
+	    },
+	    "added": [
+
+	    ],
+	    "removed": [
+
+	    ],
+	    "modified": [
+	      "Podfile"
+	    ]
+	  },
+	  "repository": {
+	    "id": 105688,
+	    "name": "unitedairlines-onboardfoodsales",
+	    "full_name": "GBS-AIC-MobileScale/unitedairlines-onboardfoodsales",
+	    "owner": {
+	      "name": "GBS-AIC-MobileScale",
+	      "email": null
+	    },
+	    "private": false,
+	    "html_url": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales",
+	    "description": "United Airlines Onboard Food Sales",
+	    "fork": false,
+	    "url": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales",
+	    "forks_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/forks",
+	    "keys_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/keys{/key_id}",
+	    "collaborators_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/collaborators{/collaborator}",
+	    "teams_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/teams",
+	    "hooks_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/hooks",
+	    "issue_events_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/issues/events{/number}",
+	    "events_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/events",
+	    "assignees_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/assignees{/user}",
+	    "branches_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/branches{/branch}",
+	    "tags_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/tags",
+	    "blobs_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/git/blobs{/sha}",
+	    "git_tags_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/git/tags{/sha}",
+	    "git_refs_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/git/refs{/sha}",
+	    "trees_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/git/trees{/sha}",
+	    "statuses_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/statuses/{sha}",
+	    "languages_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/languages",
+	    "stargazers_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/stargazers",
+	    "contributors_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/contributors",
+	    "subscribers_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/subscribers",
+	    "subscription_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/subscription",
+	    "commits_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/commits{/sha}",
+	    "git_commits_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/git/commits{/sha}",
+	    "comments_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/comments{/number}",
+	    "issue_comment_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/issues/comments{/number}",
+	    "contents_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/contents/{+path}",
+	    "compare_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/compare/{base}...{head}",
+	    "merges_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/merges",
+	    "archive_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/{archive_format}{/ref}",
+	    "downloads_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/downloads",
+	    "issues_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/issues{/number}",
+	    "pulls_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/pulls{/number}",
+	    "milestones_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/milestones{/number}",
+	    "notifications_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/notifications{?since,all,participating}",
+	    "labels_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/labels{/name}",
+	    "releases_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/releases{/id}",
+	    "deployments_url": "https://github.ibm.com/api/v3/repos/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/deployments",
+	    "created_at": 1484756159,
+	    "updated_at": "2017-01-25T23:17:18Z",
+	    "pushed_at": 1490803815,
+	    "git_url": "git://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales.git",
+	    "ssh_url": "git@github.ibm.com:GBS-AIC-MobileScale/unitedairlines-onboardfoodsales.git",
+	    "clone_url": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales.git",
+	    "svn_url": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales",
+	    "homepage": null,
+	    "size": 14617,
+	    "stargazers_count": 0,
+	    "watchers_count": 0,
+	    "language": "Swift",
+	    "has_issues": true,
+	    "has_downloads": true,
+	    "has_wiki": true,
+	    "has_pages": false,
+	    "forks_count": 1,
+	    "mirror_url": null,
+	    "open_issues_count": 2,
+	    "forks": 1,
+	    "open_issues": 2,
+	    "watchers": 0,
+	    "default_branch": "master",
+	    "stargazers": 0,
+	    "master_branch": "master",
+	    "organization": "GBS-AIC-MobileScale"
+	  },
+	  "pusher": {
+	    "name": "rajeshiy",
+	    "email": "rajeshiy@in.ibm.com"
+	  },
+	  "organization": {
+	    "login": "GBS-AIC-MobileScale",
+	    "id": 42346,
+	    "url": "https://github.ibm.com/api/v3/orgs/GBS-AIC-MobileScale",
+	    "repos_url": "https://github.ibm.com/api/v3/orgs/GBS-AIC-MobileScale/repos",
+	    "events_url": "https://github.ibm.com/api/v3/orgs/GBS-AIC-MobileScale/events",
+	    "hooks_url": "https://github.ibm.com/api/v3/orgs/GBS-AIC-MobileScale/hooks",
+	    "issues_url": "https://github.ibm.com/api/v3/orgs/GBS-AIC-MobileScale/issues",
+	    "members_url": "https://github.ibm.com/api/v3/orgs/GBS-AIC-MobileScale/members{/member}",
+	    "public_members_url": "https://github.ibm.com/api/v3/orgs/GBS-AIC-MobileScale/public_members{/member}",
+	    "avatar_url": "https://avatars.github.ibm.com/u/42346?",
+	    "description": null
+	  },
+	  "sender": {
+	    "login": "rajeshiy",
+	    "id": 51930,
+	    "avatar_url": "https://avatars.github.ibm.com/u/51930?",
+	    "gravatar_id": "",
+	    "url": "https://github.ibm.com/api/v3/users/rajeshiy",
+	    "html_url": "https://github.ibm.com/rajeshiy",
+	    "followers_url": "https://github.ibm.com/api/v3/users/rajeshiy/followers",
+	    "following_url": "https://github.ibm.com/api/v3/users/rajeshiy/following{/other_user}",
+	    "gists_url": "https://github.ibm.com/api/v3/users/rajeshiy/gists{/gist_id}",
+	    "starred_url": "https://github.ibm.com/api/v3/users/rajeshiy/starred{/owner}{/repo}",
+	    "subscriptions_url": "https://github.ibm.com/api/v3/users/rajeshiy/subscriptions",
+	    "organizations_url": "https://github.ibm.com/api/v3/users/rajeshiy/orgs",
+	    "repos_url": "https://github.ibm.com/api/v3/users/rajeshiy/repos",
+	    "events_url": "https://github.ibm.com/api/v3/users/rajeshiy/events{/privacy}",
+	    "received_events_url": "https://github.ibm.com/api/v3/users/rajeshiy/received_events",
+	    "type": "User",
+	    "site_admin": false
+	  }
+	}
+]
+```
+This endpoint receives a delivered payload from Github Enterprise on a push to a webhook enabled respository.
 
 # Insights
 
