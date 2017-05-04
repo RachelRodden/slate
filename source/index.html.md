@@ -5,6 +5,7 @@ title: Boomerang Platform API Reference
 # Introduction
 
 Welcome to the Boomerang Platform REST API! We have a list of endpoints and parameters, along with a sample json response in the dark area to the right.
+
 -------------
 # CI
 
