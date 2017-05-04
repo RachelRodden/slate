@@ -101,7 +101,7 @@ page | false | Page number of repositories returned (sets of 15). If not specifi
 		"componentId": "11aaa303-623b-4635-8a68-a194a04c91ff",
 		"componentProcessType": "BUILD",
 		"mode": "iOS"
-	},
+	}
 ]
 ```
 
@@ -251,7 +251,7 @@ activityType | false | Type of activity to retrieve (all,build,test,deploy). If 
 		"gitCommitMessage": "Updated+to+reflect+latest+Boomerang+property+reqs",
 		"gitAuthorName": "TYSON W. LAWRIE"
 		
-	},
+	}
 ]
 ```
 
@@ -501,7 +501,7 @@ payload | true | Payload delivery from Github triggered from a push to a reposit
 	    "distinct": true,
 	    "message": "get adapter from 1.0.22",
 	    "timestamp": "2017-03-29T21:36:32+05:30",
-	    "url": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-			onboardfoodsales/commit/b323b6e85e9b9afc8140d5cab35076269fda0ee5",
+	    "url": "https://github.ibm.com/GBS-AIC-MobileScale/unitedairlines-onboardfoodsales/commit/b323b6e85e9b9afc8140d5cab35076269fda0ee5",
 	    "author": {
 	      "name": "Rajesh Iyer",
 	      "email": "rajeshiy@in.ibm.com",
